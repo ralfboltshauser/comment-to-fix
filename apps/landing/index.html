@@ -3,85 +3,117 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Comment to Fix — Point, comment, get the fix</title>
+    <meta
+      name="description"
+      content="Comment to Fix turns visual website feedback into precise, code-ready tasks for coding agents."
+    />
+    <title>Comment to Fix | Visual feedback your coding agent can act on</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a href="#" class="logo">Comment to Fix</a>
-        <nav>
-          <a href="#how">How it works</a>
-          <a href="#install">Start now</a>
-          <a href="#skill">Skill</a>
+        <a href="#top" class="brand" aria-label="Comment to Fix home">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span>Comment to Fix</span>
+        </a>
+        <nav aria-label="Primary">
+          <a href="#proof">Proof</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#install">Install</a>
         </nav>
+        <a class="header-cta" href="#install">Start now</a>
       </div>
     </header>
 
-    <main>
+    <main id="top">
       <section class="hero">
         <div class="container hero-grid">
-          <div>
-            <p class="eyebrow">Comment to fix.</p>
-            <h1>You comment, agent fixes.</h1>
+          <div class="hero-copy">
+            <p class="eyebrow">For teams reviewing AI-built pages, decks, and prototypes</p>
+            <h1>Turn visual feedback into code-ready fixes.</h1>
             <p class="lead">
-              Open any HTML slide, proposal, or landing page. Point at what you want
-              different, leave a comment, and your coding agent implements it in a loop
-              until you stop.
+              Comment to Fix lets you click any element in an HTML preview, leave a precise
+              note, and hand your coding agent the exact context it needs to make the change.
             </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#install">Get Started</a>
-              <a class="button" href="#how">See how it works</a>
+            <div class="hero-actions" aria-label="Primary actions">
+              <a class="button primary" href="#install">Install the skill</a>
+              <a class="button secondary" href="#demo">Watch the loop</a>
+            </div>
+            <div class="hero-proof" aria-label="Key proof points">
+              <span>No design handoff doc</span>
+              <span>No vague screenshots</span>
+              <span>No lost context</span>
             </div>
           </div>
-          <div class="hero-card">
-            <div class="mock-toolbar">Comment to Fix · Live</div>
-            <div class="mock-page">
-              <p class="mock-label">How a review session works</p>
-              <ol class="mock-steps">
-                <li>
-                  <span class="mock-step-num">1</span>
-                  <span>Open your slide or page in the preview</span>
-                </li>
-                <li>
-                  <span class="mock-step-num">2</span>
-                  <span>Click an element and describe the fix</span>
-                </li>
-                <li>
-                  <span class="mock-step-num">3</span>
-                  <span>Your agent edits the file, changes appear here</span>
-                </li>
-              </ol>
+
+          <div class="product-stage" aria-label="Product workflow preview">
+            <div class="browser-shell">
+              <div class="browser-bar" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <strong>preview.html</strong>
+              </div>
+              <div class="preview-surface">
+                <div class="mini-page">
+                  <div class="mini-kicker"></div>
+                  <div class="mini-title"></div>
+                  <div class="mini-copy"></div>
+                  <button class="mini-button">Start trial</button>
+                </div>
+                <div class="annotation-card">
+                  <span class="pin" aria-hidden="true">1</span>
+                  <div>
+                    <strong>Make this CTA more specific</strong>
+                    <p>Use the install action and show the copied command nearby.</p>
+                  </div>
+                </div>
+                <div class="agent-card">
+                  <span class="status-dot" aria-hidden="true"></span>
+                  <div>
+                    <strong>Agent fix queued</strong>
+                    <p>Element selector, text context, viewport, and comment captured.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="demo" class="section">
-        <div class="container demo-inner">
-          <div class="demo-copy">
-            <h2>See it in action</h2>
-            <p class="demo-lead">
-              Watch a real review session: point at an element, leave a comment, and the
-              agent edits your file live — then keeps watching for the next one.
+      <section id="proof" class="proof-strip">
+        <div class="container proof-grid">
+          <div>
+            <strong>Purpose-built for agent feedback loops</strong>
+            <span>Review static HTML, annotate exact elements, and keep every fix traceable.</span>
+          </div>
+          <div>
+            <strong>Works where agents already work</strong>
+            <span>Codex, Claude Code, Cursor, and any workflow that can edit local files.</span>
+          </div>
+          <div>
+            <strong>Designed for fewer review rounds</strong>
+            <span>Every comment includes the page context an agent usually has to guess.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="demo" class="section demo-section">
+        <div class="container split">
+          <div class="section-copy">
+            <p class="eyebrow">See the actual loop</p>
+            <h2>Point at the problem. The agent gets the fix brief.</h2>
+            <p>
+              Instead of writing "the hero feels off" in chat, reviewers annotate the exact
+              headline, button, card, or spacing issue. The agent receives the comment plus
+              structured element context, edits the file, and waits for the next note.
             </p>
           </div>
           <figure class="demo-frame">
             <div class="demo-frame-bar" aria-hidden="true">
-              <span class="demo-dot"></span>
-              <span class="demo-dot"></span>
-              <span class="demo-dot"></span>
-              <span class="demo-frame-label">comment-to-fix · demo</span>
+              <span></span><span></span><span></span>
+              <strong>comment-to-fix demo</strong>
             </div>
-            <video
-              class="demo-video"
-              autoplay
-              muted
-              loop
-              playsinline
-              controls
-              preload="metadata"
-            >
+            <video class="demo-video" autoplay muted loop playsinline controls preload="metadata">
               <source
                 src="https://exploration.nbg1.your-objectstorage.com/comment-to-fix-demo.mp4"
                 type="video/mp4"
@@ -92,265 +124,198 @@
         </div>
       </section>
 
-      <section id="how" class="section">
+      <section id="workflow" class="section workflow-section">
         <div class="container">
-          <h2>How it works</h2>
-          <div class="steps-wrap">
-            <ol class="steps">
-              <li>
-                <span class="step-num" aria-hidden="true">1</span>
-                <div class="step-body">
-                  <strong>Ask for HTML</strong>
-                  <span>Ask your agent to generate an HTML proposal, HTML slides, a landing page — whatever you need.</span>
-                </div>
-              </li>
-              <li>
-                <span class="step-num" aria-hidden="true">2</span>
-                <div class="step-body">
-                  <strong>Run /comment-to-fix</strong>
-                  <span>Start the skill on your HTML file and open the preview.</span>
-                </div>
-              </li>
-              <li>
-                <span class="step-num" aria-hidden="true">3</span>
-                <div class="step-body">
-                  <strong>Comment what you want fixed</strong>
-                  <span>Click an element or select text and say what should change.</span>
-                </div>
-              </li>
-              <li>
-                <span class="step-num" aria-hidden="true">4</span>
-                <div class="step-body">
-                  <strong>Your agent fixes it</strong>
-                  <span>Each comment is sent immediately. The agent fixes, then watches for the next one.</span>
-                </div>
-              </li>
-            </ol>
-            <div class="steps-loop" aria-label="Steps 3 and 4 repeat until you are happy">
-              <span class="steps-loop-icon" aria-hidden="true">↻</span>
-              <div class="steps-loop-flow">
-                <span class="steps-loop-chip">3 · Comment</span>
-                <span class="steps-loop-arrow" aria-hidden="true">→</span>
-                <span class="steps-loop-chip">4 · Fix</span>
-                <span class="steps-loop-arrow" aria-hidden="true">→</span>
-                <span class="steps-loop-chip muted">Review</span>
-              </div>
-              <p class="steps-loop-note">Repeat steps 3 &amp; 4 until you're happy with everything.</p>
+          <div class="section-heading">
+            <p class="eyebrow">The workflow</p>
+            <h2>A landing page review loop built for precision.</h2>
+          </div>
+          <ol class="workflow-grid">
+            <li>
+              <span>01</span>
+              <strong>Open a local HTML preview</strong>
+              <p>Launch the overlay on the page, slide deck, proposal, or prototype your agent generated.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>Comment on the exact element</strong>
+              <p>Click, select, or target the thing that needs work. The note stays attached to the page context.</p>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>Send a better task to the agent</strong>
+              <p>The agent receives the selector, surrounding copy, viewport, screenshot context, and your instruction.</p>
+            </li>
+            <li>
+              <span>04</span>
+              <strong>Review, approve, or repeat</strong>
+              <p>Markers show status as the agent edits. Keep commenting until the page is ready.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section outcomes-section">
+        <div class="container outcomes-grid">
+          <div class="outcome-copy">
+            <p class="eyebrow">Why teams switch</p>
+            <h2>Most feedback is too vague for an agent. This makes it actionable.</h2>
+            <p>
+              Screenshots and chat notes drop the details agents need: which node, which state,
+              which nearby text, and which file changed. Comment to Fix packages those details
+              into the review loop.
+            </p>
+          </div>
+          <div class="comparison" aria-label="Before and after comparison">
+            <div>
+              <h3>Before</h3>
+              <ul>
+                <li>"Move this up a bit" in chat</li>
+                <li>Annotated screenshots detached from code</li>
+                <li>Repeated explanations after every revision</li>
+              </ul>
+            </div>
+            <div>
+              <h3>After</h3>
+              <ul>
+                <li>Element-specific comments</li>
+                <li>Agent-ready context captured automatically</li>
+                <li>A repeatable comment, fix, review loop</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="works" class="section works">
-        <div class="container works-inner">
-          <p class="works-label">Works in</p>
-          <ul class="works-list">
-            <li class="works-item">
-              <svg class="works-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z" />
-              </svg>
-              <span>Codex</span>
-            </li>
-            <li class="works-item">
-              <svg class="works-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z" />
-              </svg>
-              <span>Claude</span>
-            </li>
-            <li class="works-item">
-              <svg class="works-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23" />
-              </svg>
-              <span>Cursor</span>
-            </li>
-            <li class="works-item works-more"><span>&amp; much more</span></li>
+      <section class="section trust-section">
+        <div class="container trust-grid">
+          <div>
+            <h2>Built for local-first review.</h2>
+            <p>
+              Run it against files in your workspace. Keep the page, comments, and agent edits
+              inside the same development loop.
+            </p>
+          </div>
+          <ul class="trust-list">
+            <li>Works with static HTML output</li>
+            <li>Captures comment state for follow-up</li>
+            <li>Supports repeat review sessions</li>
+            <li>Pairs with existing coding agents</li>
           </ul>
         </div>
       </section>
 
-      <section id="install" class="section muted">
-        <div class="container">
-          <h2>Start now</h2>
-          <p class="install-lead">Three steps from comment to fix.</p>
-          <ol class="start-steps">
-            <li>
-              <div class="start-step-body">
-                <strong>Install the skill</strong>
-                <p>One command adds the skill and the <code>comment-to-fix</code> CLI to your agent.</p>
-                <div class="code-block">
-                  <pre class="install-block"><code>npx skills add ralfboltshauser/comment-to-fix</code></pre>
-                  <button type="button" class="code-copy">Copy</button>
+      <section id="install" class="section install-section">
+        <div class="container install-panel">
+          <div class="install-copy">
+            <p class="eyebrow">Try it from zero</p>
+            <h2>Paste these into Claude or Codex, one after the other.</h2>
+            <p>
+              If you already have an HTML page, skip step 1. If you just want to try the workflow,
+              start by asking your agent to make one.
+            </p>
+          </div>
+          <div class="install-box">
+            <ol class="setup-steps">
+              <li class="usage-card">
+                <span class="usage-step">Step 1 · Get an HTML file</span>
+                <p>If you have no HTML yet, paste this into Claude or Codex first:</p>
+                <div class="command-copy">
+                  <code id="generate-command">Generate an HTML-based landing page for my startup idea. Ideate something strong and save it as an HTML file.</code>
+                  <button
+                    type="button"
+                    class="copy-button"
+                    data-copy-target="generate-command"
+                    aria-label="Copy starter prompt"
+                  >
+                    Copy
+                  </button>
                 </div>
-              </div>
-            </li>
-            <li>
-              <div class="start-step-body">
-                <strong>Run it in your agent</strong>
-                <p>
-                  Type <code class="copy-inline" title="Click to copy">/comment-to-fix</code> in
-                  Cursor, Claude Code, or Codex and tell it which HTML file to edit. Your agent
-                  starts the preview for you.
+              </li>
+              <li class="usage-card">
+                <span class="usage-step">Step 2 · Install the skill</span>
+                <p>Paste this into the same Claude or Codex chat:</p>
+                <div class="command-copy">
+                  <code id="install-command">npx skills add ralfboltshauser/comment-to-fix</code>
+                  <button
+                    type="button"
+                    class="copy-button"
+                    data-copy-target="install-command"
+                    aria-label="Copy install command"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </li>
+              <li class="usage-card">
+                <span class="usage-step">Step 3 · Restart your agent</span>
+                <p>Close and reopen Claude or Codex so it can see the new skill.</p>
+              </li>
+              <li class="usage-card">
+                <span class="usage-step">Step 4 · Run Comment to Fix</span>
+                <p>Paste this into Claude or Codex. It will open your HTML and start watching for comments:</p>
+                <div class="command-copy">
+                  <code id="usage-command">/comment-to-fix for my HTML slides</code>
+                  <button
+                    type="button"
+                    class="copy-button"
+                    data-copy-target="usage-command"
+                    aria-label="Copy usage prompt"
+                  >
+                    Copy
+                  </button>
+                </div>
+                <p class="usage-note">
+                  Replace "HTML slides" with "landing page", "proposal", or whatever HTML file you want to review.
                 </p>
-              </div>
-            </li>
-            <li>
-              <div class="start-step-body">
-                <strong>Label what to change</strong>
-                <p>
-                  Point at anything in the preview and leave a comment. Your agent fixes each one
-                  and keeps watching until you say stop.
-                </p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="states" class="section muted">
-        <div class="container">
-          <h2>Every comment has a state</h2>
-          <p class="states-lead">
-            Each marker on the page shows exactly where your comment is in the loop, so you
-            always know what the agent is doing.
-          </p>
-          <ol class="states-grid">
-            <li class="state-card">
-              <span class="state-pin annotating" aria-hidden="true">
-                <svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M6 2V10M2 6H10" stroke-linecap="round" />
-                </svg>
-              </span>
-              <div class="state-body">
-                <strong>Annotating</strong>
-                <span>You picked an element and you're typing what should change.</span>
-              </div>
-            </li>
-            <li class="state-card">
-              <span class="state-pin sent" aria-hidden="true">1</span>
-              <div class="state-body">
-                <strong>Sent</strong>
-                <span>The comment is captured and queued in the agent's inbox.</span>
-              </div>
-            </li>
-            <li class="state-card">
-              <span class="state-pin fixing" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="state-spin">
-                  <path d="M12 3V6" stroke-linecap="round" />
-                  <path d="M12 18V21" stroke-linecap="round" opacity="0.4" />
-                  <path d="M3 12H6" stroke-linecap="round" opacity="0.7" />
-                  <path d="M18 12H21" stroke-linecap="round" opacity="0.5" />
-                </svg>
-              </span>
-              <div class="state-body">
-                <strong>Fixing</strong>
-                <span>The agent has the comment and is editing your files right now.</span>
-              </div>
-            </li>
-            <li class="state-card">
-              <span class="state-pin ready" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M3.9 12.8C5.4 9.6 8.5 6.2 12 6.2C15.5 6.2 18.6 9.6 20.1 12.8C18.6 16 15.5 19.4 12 19.4C8.5 19.4 5.4 16 3.9 12.8Z" stroke-linejoin="round" />
-                  <circle cx="12" cy="12.8" r="2.8" />
-                </svg>
-              </span>
-              <div class="state-body">
-                <strong>Ready</strong>
-                <span>The fix landed. Click the green marker to reload and see the change.</span>
-              </div>
-            </li>
-            <li class="state-card">
-              <span class="state-pin dismissed" aria-hidden="true">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M6 6L18 18M18 6L6 18" stroke-linecap="round" />
-                </svg>
-              </span>
-              <div class="state-body">
-                <strong>Dismissed</strong>
-                <span>You hid the marker. It stays in history so you can jump back anytime.</span>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="skill" class="section">
-        <div class="container">
-          <h2>Agent skill</h2>
-          <p>
-            Install the skill, then run <code>/comment-to-fix</code> in Cursor, Claude Code,
-            or Codex. Your agent starts the preview, watches for comments, fixes each one,
-            and keeps watching until you say stop.
-          </p>
-          <div class="code-block">
-            <pre class="install-block"><code>npx skills add ralfboltshauser/comment-to-fix</code></pre>
-            <button type="button" class="code-copy">Copy</button>
+              </li>
+            </ol>
+            <div class="paste-note">
+              <strong>Simple version:</strong>
+              <span>Paste step 2, restart, then paste step 4. Comment to Fix will go to work.</span>
+            </div>
+            <a class="button primary" href="https://github.com/ralfboltshauser/comment-to-fix">View on GitHub</a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <a href="#" class="logo">Comment to Fix</a>
-          <p>Point at any HTML page, leave a comment, get the fix.</p>
-        </div>
-        <nav class="footer-nav" aria-label="Footer">
-          <div class="footer-col">
-            <span class="footer-col-title">Product</span>
-            <a href="#how">How it works</a>
-            <a href="#demo">Demo</a>
-            <a href="#install">Start now</a>
-          </div>
-          <div class="footer-col">
-            <span class="footer-col-title">Resources</span>
-            <a href="https://github.com/ralfboltshauser/comment-to-fix" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.npmjs.com/package/comment-to-fix" target="_blank" rel="noopener">npm</a>
-            <a href="https://skills.sh/ralfboltshauser/comment-to-fix" target="_blank" rel="noopener">skills.sh</a>
-          </div>
-        </nav>
-      </div>
-      <div class="container footer-bottom">
-        <span>&copy; 2026 Comment to Fix</span>
-        <span>MIT licensed</span>
-      </div>
-    </footer>
     <script>
-      document.querySelector(".logo")?.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      function copyText(text, onDone) {
-        if (!text) return;
-        navigator.clipboard.writeText(text).then(onDone);
-      }
-
-      document.querySelectorAll(".code-copy").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var text = btn.closest(".code-block")?.querySelector("code")?.textContent;
-          copyText(text, function () {
-            btn.textContent = "Copied";
-            setTimeout(function () { btn.textContent = "Copy"; }, 1500);
-          });
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (event) => {
+          const target = document.querySelector(anchor.getAttribute("href"));
+          if (!target) return;
+          event.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
 
-      document.querySelectorAll("code.copy-inline").forEach(function (el) {
-        el.setAttribute("role", "button");
-        el.setAttribute("tabindex", "0");
-        function doCopy() {
-          copyText(el.textContent, function () {
-            el.classList.add("copied");
-            setTimeout(function () { el.classList.remove("copied"); }, 1200);
-          });
-        }
-        el.addEventListener("click", doCopy);
-        el.addEventListener("keydown", function (e) {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            doCopy();
+      document.querySelectorAll("[data-copy-target]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const target = document.getElementById(button.dataset.copyTarget);
+          if (!target) return;
+
+          const text = target.textContent.trim();
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            textarea.remove();
           }
+
+          button.textContent = "Copied";
+          button.classList.add("copied");
+          window.setTimeout(() => {
+            button.textContent = "Copy";
+            button.classList.remove("copied");
+          }, 1600);
         });
       });
     </script>
