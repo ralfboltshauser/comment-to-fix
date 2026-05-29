@@ -1,5 +1,7 @@
 # Comment to Fix
 
+[![Install with skills](https://skills.sh/b/ralfboltshauser/comment-to-fix)](https://skills.sh/ralfboltshauser/comment-to-fix)
+
 **Comment to fix.** Point at any HTML page, leave a comment, get the fix.
 
 Monorepo for the Comment to Fix CLI, browser overlay, agent skill, and plain HTML landing page.
