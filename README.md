@@ -35,7 +35,7 @@ Defaults to `./index.html` in the current directory.
 Install the skill:
 
 ```bash
-npx skills add ralf-boltshauser/comment-to-fix
+npx skills add ralfboltshauser/comment-to-fix
 ```
 
 Then in your agent:

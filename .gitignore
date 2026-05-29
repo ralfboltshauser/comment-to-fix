@@ -4,3 +4,4 @@ dist
 .comment-to-fix
 *.log
 .DS_Store
+.vercel

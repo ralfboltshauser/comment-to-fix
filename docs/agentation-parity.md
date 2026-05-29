@@ -3,6 +3,7 @@
 Track UX parity with Agentation feedback mode (not layout/MCP).
 
 ## Toolbar
+
 - [x] Collapsed icon with annotation count badge
 - [x] Expanded controls on activate
 - [x] Draggable toolbar with position persistence
@@ -15,6 +16,7 @@ Track UX parity with Agentation feedback mode (not layout/MCP).
 - [x] Cmd/Ctrl+Shift+F toggle mode
 
 ## Annotation modes
+
 - [x] Element click
 - [x] Text selection (click with selection + selection chip)
 - [x] Multi-select (Cmd+Shift+click, release to confirm)
@@ -22,6 +24,7 @@ Track UX parity with Agentation feedback mode (not layout/MCP).
 - [x] Animation pause before annotating
 
 ## Comment popup
+
 - [x] Anchored to marker (not cursor)
 - [x] Viewport flip above/below
 - [x] Collapsible computed styles
@@ -32,6 +35,7 @@ Track UX parity with Agentation feedback mode (not layout/MCP).
 - [x] Edit mode with Save + Delete
 
 ## Markers
+
 - [x] Numbered pins (blue single, green multi)
 - [x] Fixed vs scroll layers
 - [x] Hover tooltip with element + comment
@@ -42,11 +46,13 @@ Track UX parity with Agentation feedback mode (not layout/MCP).
 - [x] Enter/exit animations
 
 ## Output
+
 - [x] Immediate POST send on submit (CLI inbox)
 - [x] Copy-all with detail levels
 - [x] Auto-clear after copy/send (settings)
 
 ## Settings
+
 - [x] Output detail cycle
 - [x] Marker color picker
 - [x] Dark/light theme
@@ -54,6 +60,7 @@ Track UX parity with Agentation feedback mode (not layout/MCP).
 - [x] Marker click behavior
 
 ## Polish
+
 - [x] CSS micro-interactions (toolbar, popup, markers)
 - [x] Host page CSS isolation for portaled UI
 - [x] Expanded test fixture

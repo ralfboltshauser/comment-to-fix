@@ -13,7 +13,7 @@ Use this skill when the user wants to review an HTML slide, proposal, landing pa
 ## Install (once per machine)
 
 ```bash
-npx skills add <your-org>/comment-to-fix
+npx skills add ralfboltshauser/comment-to-fix
 ```
 
 The CLI itself runs via:
