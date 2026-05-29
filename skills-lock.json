@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "comment-to-fix": {
+      "source": "ralfboltshauser/comment-to-fix",
+      "sourceType": "github",
+      "skillPath": "skills/comment-to-fix/SKILL.md",
+      "computedHash": "e559144ef6eec316c036c214cacc6ccc087b8e118988eb32ba2e2b936657ba68"
+    }
+  }
+}
