@@ -1,0 +1,39 @@
+{
+  "name": "comment-to-fix",
+  "version": "0.1.0",
+  "description": "Comment to Fix — point at HTML, comment, get the fix",
+  "type": "module",
+  "bin": {
+    "comment-to-fix": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node esbuild.config.mjs && node scripts/copy-assets.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "dev": "node esbuild.config.mjs --watch",
+    "prepublishOnly": "pnpm --filter @comment-to-fix/overlay build && pnpm build"
+  },
+  "devDependencies": {
+    "@comment-to-fix/core": "workspace:*",
+    "@comment-to-fix/overlay": "workspace:*",
+    "esbuild": "^0.25.0",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "keywords": [
+    "comment-to-fix",
+    "annotation",
+    "html",
+    "agent",
+    "feedback"
+  ]
+}

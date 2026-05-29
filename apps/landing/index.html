@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment to Fix — Point, comment, get the fix</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#" class="logo">Comment to Fix</a>
+        <nav>
+          <a href="#how">How it works</a>
+          <a href="#install">Start now</a>
+          <a href="#skill">Skill</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Comment to fix.</p>
+            <h1>Point at it. Say the fix. Watch it happen.</h1>
+            <p class="lead">
+              Open any HTML slide, proposal, or landing page. Point at what you want
+              different, leave a comment, and your coding agent implements it in a loop
+              until you stop.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#install">Get Started</a>
+              <a class="button" href="#how">See how it works</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="mock-toolbar">Comment to Fix · Live updates on your HTML</div>
+            <div class="mock-page">
+              <p class="mock-label">How a review session works</p>
+              <ol class="mock-steps">
+                <li>
+                  <span class="mock-step-num">1</span>
+                  <span>Open your slide or page in the preview</span>
+                </li>
+                <li>
+                  <span class="mock-step-num">2</span>
+                  <span>Click an element and describe the fix</span>
+                </li>
+                <li>
+                  <span class="mock-step-num">3</span>
+                  <span>Your agent edits the file, changes appear here</span>
+                </li>
+              </ol>
+              <div class="mock-annotation">
+                <span class="mock-pin">1</span>
+                <div class="mock-comment">
+                  <strong>Make headline shorter</strong>
+                  <span>→ agent updates index.html</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how" class="section">
+        <div class="container">
+          <h2>How it works</h2>
+          <div class="steps-wrap">
+            <ol class="steps">
+              <li>
+                <span class="step-num" aria-hidden="true">1</span>
+                <div class="step-body">
+                  <strong>Open your HTML</strong>
+                  <span>Run the CLI on a slide, proposal, or landing page folder.</span>
+                </div>
+              </li>
+              <li>
+                <span class="step-num" aria-hidden="true">2</span>
+                <div class="step-body">
+                  <strong>Comment on the page</strong>
+                  <span>Click an element or select text and say what should change.</span>
+                </div>
+              </li>
+              <li>
+                <span class="step-num" aria-hidden="true">3</span>
+                <div class="step-body">
+                  <strong>Your agent fixes it</strong>
+                  <span>Each comment is sent immediately. The agent fixes, then watches for the next one.</span>
+                </div>
+              </li>
+            </ol>
+            <div class="steps-loop" aria-label="Steps 2 and 3 repeat until you are happy">
+              <span class="steps-loop-icon" aria-hidden="true">↻</span>
+              <div class="steps-loop-flow">
+                <span class="steps-loop-chip">2 · Comment</span>
+                <span class="steps-loop-arrow" aria-hidden="true">→</span>
+                <span class="steps-loop-chip">3 · Fix</span>
+                <span class="steps-loop-arrow" aria-hidden="true">→</span>
+                <span class="steps-loop-chip muted">Review</span>
+              </div>
+              <p class="steps-loop-note">Repeat steps 2 &amp; 3 until you're happy with everything.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="install" class="section muted">
+        <div class="container">
+          <h2>Start now</h2>
+          <p class="install-lead">Pick a command, run it in your project folder, and open the preview.</p>
+          <div class="code-grid">
+            <div class="code-block">
+              <pre><code>npx comment-to-fix</code></pre>
+              <button type="button" class="code-copy">Copy</button>
+            </div>
+            <div class="code-block">
+              <pre><code>pnpm dlx comment-to-fix ./index.html --open</code></pre>
+              <button type="button" class="code-copy">Copy</button>
+            </div>
+            <div class="code-block">
+              <pre><code>bunx comment-to-fix proposal.html --open</code></pre>
+              <button type="button" class="code-copy">Copy</button>
+            </div>
+          </div>
+          <p class="hint">Defaults to <code>./index.html</code> in the current directory.</p>
+        </div>
+      </section>
+
+      <section id="states" class="section muted">
+        <div class="container">
+          <h2>Every comment has a state</h2>
+          <p class="states-lead">
+            Each marker on the page shows exactly where your comment is in the loop, so you
+            always know what the agent is doing.
+          </p>
+          <ol class="states-grid">
+            <li class="state-card">
+              <span class="state-pin annotating" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M6 2V10M2 6H10" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div class="state-body">
+                <strong>Annotating</strong>
+                <span>You picked an element and you're typing what should change.</span>
+              </div>
+            </li>
+            <li class="state-card">
+              <span class="state-pin sent" aria-hidden="true">1</span>
+              <div class="state-body">
+                <strong>Sent</strong>
+                <span>The comment is captured and queued in the agent's inbox.</span>
+              </div>
+            </li>
+            <li class="state-card">
+              <span class="state-pin fixing" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="state-spin">
+                  <path d="M12 3V6" stroke-linecap="round" />
+                  <path d="M12 18V21" stroke-linecap="round" opacity="0.4" />
+                  <path d="M3 12H6" stroke-linecap="round" opacity="0.7" />
+                  <path d="M18 12H21" stroke-linecap="round" opacity="0.5" />
+                </svg>
+              </span>
+              <div class="state-body">
+                <strong>Fixing</strong>
+                <span>The agent has the comment and is editing your files right now.</span>
+              </div>
+            </li>
+            <li class="state-card">
+              <span class="state-pin ready" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3.9 12.8C5.4 9.6 8.5 6.2 12 6.2C15.5 6.2 18.6 9.6 20.1 12.8C18.6 16 15.5 19.4 12 19.4C8.5 19.4 5.4 16 3.9 12.8Z" stroke-linejoin="round" />
+                  <circle cx="12" cy="12.8" r="2.8" />
+                </svg>
+              </span>
+              <div class="state-body">
+                <strong>Ready</strong>
+                <span>The fix landed. Click the green marker to reload and see the change.</span>
+              </div>
+            </li>
+            <li class="state-card">
+              <span class="state-pin dismissed" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M6 6L18 18M18 6L6 18" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div class="state-body">
+                <strong>Dismissed</strong>
+                <span>You hid the marker. It stays in history so you can jump back anytime.</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="skill" class="section">
+        <div class="container">
+          <h2>Agent skill</h2>
+          <p>
+            Install the skill, then run <code>/comment-to-fix</code> in Cursor, Claude Code,
+            or Codex. Your agent starts the preview, watches for comments, fixes each one,
+            and keeps watching until you say stop.
+          </p>
+          <pre class="install-block"><code>npx skills add ralfboltshauser/comment-to-fix</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Comment to Fix — like telling a designer what you want different, except it gets built.</p>
+      </div>
+    </footer>
+    <script>
+      document.querySelector(".logo")?.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      document.querySelectorAll(".code-copy").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var text = btn.closest(".code-block")?.querySelector("code")?.textContent;
+          if (!text) return;
+          navigator.clipboard.writeText(text).then(function () {
+            btn.textContent = "Copied";
+            setTimeout(function () { btn.textContent = "Copy"; }, 1500);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

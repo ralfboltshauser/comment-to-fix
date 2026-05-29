@@ -1,0 +1,18 @@
+{
+  "name": "@comment-to-fix/overlay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "node esbuild.config.mjs --watch"
+  },
+  "dependencies": {
+    "@comment-to-fix/core": "workspace:*",
+    "preact": "^10.26.5"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.5"
+  }
+}

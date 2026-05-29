@@ -1,0 +1,25 @@
+{
+  "name": "comment-to-fix-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "test": "turbo test",
+    "typecheck": "turbo typecheck",
+    "dev:landing": "pnpm build && node packages/cli/dist/index.js apps/landing/index.html --root apps/landing --open",
+    "comment-to-fix": "pnpm --filter comment-to-fix exec comment-to-fix"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,6 @@
+node_modules
+dist
+.turbo
+.comment-to-fix
+*.log
+.DS_Store

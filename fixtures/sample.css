@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #faf7f2;
+  color: #171717;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 24px;
+  background: rgba(250, 247, 242, 0.95);
+  border-bottom: 1px solid #e5e0d8;
+  z-index: 100;
+}
+
+.page {
+  max-width: 720px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.hero-copy {
+  font-size: 1.125rem;
+  color: #555;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.primary-cta,
+.secondary-cta {
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.primary-cta {
+  border: none;
+  background: #111;
+  color: white;
+}
+
+.secondary-cta {
+  border: 1px solid #ccc;
+  background: white;
+  color: #111;
+}
+
+.empty-region {
+  margin-top: 48px;
+  min-height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+}
+
+.animated-box {
+  margin-top: 32px;
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  background: #007aff;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}
