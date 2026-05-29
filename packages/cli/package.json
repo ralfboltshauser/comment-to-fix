@@ -4,7 +4,7 @@
   "description": "Comment to Fix — point at HTML, comment, get the fix",
   "type": "module",
   "bin": {
-    "comment-to-fix": "./dist/index.js"
+    "comment-to-fix": "dist/index.js"
   },
   "files": [
     "dist"
