@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { DEFAULT_INBOX_FILE } from "@comment-to-fix/core";
+import { DEFAULT_INBOX_FILE, DEFAULT_PREVIEW_PORT } from "@comment-to-fix/core";
 
 import type { MarkProcessedOptions } from "./commands/mark-processed.js";
 import type { PreviewOptions } from "./commands/preview.js";
@@ -39,14 +39,14 @@ function parseSharedFlags(args: string[]): {
     root?: string;
     port: number;
     open: boolean;
-    inbox: string;
+    inbox?: string;
     id?: string;
     once: boolean;
   };
   rest: string[];
 } {
   const portRaw = readFlag(args, "--port");
-  const port = portRaw ? Number.parseInt(portRaw, 10) : 5173;
+  const port = portRaw ? Number.parseInt(portRaw, 10) : DEFAULT_PREVIEW_PORT;
   if (!Number.isFinite(port) || port <= 0 || port >= 65536) {
     throw new Error(`Invalid --port value: ${portRaw}`);
   }
@@ -56,7 +56,7 @@ function parseSharedFlags(args: string[]): {
       root: readFlag(args, "--root") ?? undefined,
       port,
       open: hasFlag(args, "--open"),
-      inbox: readFlag(args, "--inbox") ?? DEFAULT_INBOX_FILE,
+      inbox: readFlag(args, "--inbox") ?? undefined,
       id: readFlag(args, "--id") ?? undefined,
       once: hasFlag(args, "--once"),
     },
@@ -99,7 +99,7 @@ export function parseWatchArgs(args: string[]): WatchOptions {
 
   return {
     once: true,
-    inbox: flags.inbox,
+    inbox: flags.inbox ?? DEFAULT_INBOX_FILE,
   };
 }
 
@@ -112,6 +112,6 @@ export function parseMarkProcessedArgs(args: string[]): MarkProcessedOptions {
 
   return {
     id,
-    inbox: flags.inbox,
+    inbox: flags.inbox ?? DEFAULT_INBOX_FILE,
   };
 }

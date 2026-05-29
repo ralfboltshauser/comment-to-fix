@@ -1092,6 +1092,36 @@ export function App() {
   const highlightId = hoveredId ?? focusedId;
   const hoveredAnnotation = highlightId ? annotations.find((a) => a.id === highlightId) : null;
 
+  const editFromMarker = (ann: Annotation): void => {
+    const target = annotations.find((x) => x.id === ann.id) ?? ann;
+    setEditDraft(target.comment);
+    setEditing(target);
+  };
+
+  const renderMarker = (annotation: Annotation, index: number) => (
+    <AnnotationMarker
+      key={annotation.id}
+      annotation={annotation}
+      index={index}
+      isHovered={hoveredId === annotation.id}
+      isFocused={focusedId === annotation.id}
+      isExiting={isClearing || exitingIds.has(annotation.id)}
+      isEditingAny={!!editing}
+      markerClickBehavior={settings.markerClickBehavior}
+      onHover={(ann) => setHoveredId(ann?.id ?? null)}
+      onDismiss={dismissAnnotation}
+      onApplyFix={applyReadyFixes}
+      onClick={(ann) => {
+        if (settings.markerClickBehavior === "delete") {
+          deleteAnnotation(ann.id);
+        } else {
+          editFromMarker(ann);
+        }
+      }}
+      onContextMenu={editFromMarker}
+    />
+  );
+
   const root = (
     <div
       className={`ctf-layer ${settings.dark ? "" : "light"}`}
@@ -1239,66 +1269,10 @@ export function App() {
       {showMarkers && active && (
         <>
           <div className="ctf-markers-scroll">
-            {scrollAnns.map((a, i) => (
-              <AnnotationMarker
-                key={a.id}
-                annotation={{ ...a, y: (a.y ?? 0) - scrollY }}
-                index={i}
-                isHovered={hoveredId === a.id}
-                isFocused={focusedId === a.id}
-                isExiting={isClearing || exitingIds.has(a.id)}
-                isEditingAny={!!editing}
-                markerClickBehavior={settings.markerClickBehavior}
-                onHover={(ann) => setHoveredId(ann?.id ?? null)}
-                onDismiss={dismissAnnotation}
-                onApplyFix={applyReadyFixes}
-                onClick={(ann) => {
-                  const target = annotations.find((x) => x.id === ann.id) ?? ann;
-                  if (settings.markerClickBehavior === "delete") {
-                    deleteAnnotation(ann.id);
-                  } else {
-                    setEditDraft(target.comment);
-                    setEditing(target);
-                  }
-                }}
-                onContextMenu={(ann) => {
-                  const target = annotations.find((x) => x.id === ann.id) ?? ann;
-                  setEditDraft(target.comment);
-                  setEditing(target);
-                }}
-              />
-            ))}
+            {scrollAnns.map((a, i) => renderMarker({ ...a, y: (a.y ?? 0) - scrollY }, i))}
           </div>
           <div className="ctf-markers-fixed">
-            {fixedAnns.map((a, i) => (
-              <AnnotationMarker
-                key={a.id}
-                annotation={a}
-                index={i}
-                isHovered={hoveredId === a.id}
-                isFocused={focusedId === a.id}
-                isExiting={isClearing || exitingIds.has(a.id)}
-                isEditingAny={!!editing}
-                markerClickBehavior={settings.markerClickBehavior}
-                onHover={(ann) => setHoveredId(ann?.id ?? null)}
-                onDismiss={dismissAnnotation}
-                onApplyFix={applyReadyFixes}
-                onClick={(ann) => {
-                  const target = annotations.find((x) => x.id === ann.id) ?? ann;
-                  if (settings.markerClickBehavior === "delete") {
-                    deleteAnnotation(ann.id);
-                  } else {
-                    setEditDraft(target.comment);
-                    setEditing(target);
-                  }
-                }}
-                onContextMenu={(ann) => {
-                  const target = annotations.find((x) => x.id === ann.id) ?? ann;
-                  setEditDraft(target.comment);
-                  setEditing(target);
-                }}
-              />
-            ))}
+            {fixedAnns.map((a, i) => renderMarker(a, i))}
           </div>
         </>
       )}

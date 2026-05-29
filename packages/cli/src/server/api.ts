@@ -3,7 +3,6 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import {
   appendAnnotation,
   createAnnotationId,
-  DEFAULT_PROCESSED_FILE,
   formatAnnotationMarkdown,
   type Annotation,
 } from "@comment-to-fix/core";
@@ -63,11 +62,4 @@ export async function handleCommentPost(
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: message }));
   }
-}
-
-export function getProcessedPath(inboxPath: string): string {
-  if (inboxPath.endsWith("inbox.jsonl")) {
-    return inboxPath.replace(/inbox\.jsonl$/, "processed.json");
-  }
-  return DEFAULT_PROCESSED_FILE;
 }

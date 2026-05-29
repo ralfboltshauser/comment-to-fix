@@ -45,6 +45,17 @@ npx comment-to-fix [file.html] --open
 
 Use `pnpm dlx` or `bunx` only if the user explicitly prefers that package manager. Default to `npx` for compatibility.
 
+**Read the preview output before continuing.** It prints three lines you must capture for this session:
+
+```
+Comment to Fix preview: http://127.0.0.1:5174/index.html
+Port: 5174
+Inbox: /abs/path/.comment-to-fix/inbox-5174.jsonl
+```
+
+- The port auto-increments when a port is busy, so **never assume 5173** — use the URL it printed.
+- The `Inbox` path is **port-scoped** so multiple Comment to Fix sessions run in parallel without colliding. Remember this exact path and pass it as `--inbox <inbox>` to every `watch` and `mark-processed` call in this session.
+
 Tell the user:
 
 > Comment to Fix is open. Click the comment button (bottom-right) to enter feedback mode, then point at anything and leave a comment. Use **Copy** (C) to copy all feedback as markdown, or **Send** on each comment for the agent loop. Say **stop** when you're done.
@@ -88,9 +99,9 @@ When implementing fixes, always run `mark-processed` after the change — that t
 
 Repeat until the user explicitly says stop / done / exit comment to fix:
 
-1. Run:
+1. Run (use the `Inbox` path from step 3):
    ```bash
-   npx comment-to-fix watch --once
+   npx comment-to-fix watch --once --inbox <inbox>
    ```
 2. Parse the JSON line printed to stdout
 3. Implement the smallest correct fix in files under `annotation.root` using:
@@ -101,10 +112,12 @@ Repeat until the user explicitly says stop / done / exit comment to fix:
    - `annotation.page`
 4. Run:
    ```bash
-   npx comment-to-fix mark-processed --id <annotation.id>
+   npx comment-to-fix mark-processed --id <annotation.id> --inbox <inbox>
    ```
 5. Reply briefly with what changed and: **Waiting for your next comment…**
 6. Go back to step 1
+
+> For the default session (port 5173) the `--inbox` flag is optional — it defaults to `.comment-to-fix/inbox.jsonl`. Always pass it when running parallel sessions so each loop reads its own inbox.
 
 **Critical rules:**
 

@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const assetDirCandidates = [
   path.join(__dirname, "assets"),
   path.join(__dirname, "..", "assets"),
-];
+] as const;
 
 export function getAssetPath(name: string): string {
   for (const dir of assetDirCandidates) {

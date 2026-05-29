@@ -10,6 +10,21 @@ export async function ensureInboxDir(
   await mkdir(path.dirname(inboxPath), { recursive: true });
 }
 
+/**
+ * Co-locate the processed-state file next to its inbox so each session
+ * (default or port-scoped) keeps independent progress.
+ *
+ * `inbox.jsonl` -> `processed.json`, `inbox-5174.jsonl` -> `processed-5174.json`.
+ */
+export function processedPathForInbox(inboxPath: string): string {
+  const dir = path.dirname(inboxPath);
+  const base = path
+    .basename(inboxPath)
+    .replace(/\.jsonl$/, ".json")
+    .replace(/^inbox/, "processed");
+  return path.join(dir, base);
+}
+
 export async function appendAnnotation(
   annotation: Annotation,
   inboxPath: string = DEFAULT_INBOX_FILE,

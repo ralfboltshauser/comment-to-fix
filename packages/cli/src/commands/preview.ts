@@ -13,7 +13,8 @@ export type PreviewOptions = {
   rootLabel: string;
   port: number;
   open: boolean;
-  inbox: string;
+  /** Explicit inbox path; when omitted the server derives one from the bound port. */
+  inbox?: string;
   relativePage?: string;
   pageUrl?: string;
 };
@@ -50,14 +51,20 @@ export async function runPreview(options: PreviewOptions): Promise<void> {
     throw new Error(`HTML file must be inside root directory (${root})`);
   }
 
-  const { url, close } = await startPreviewServer({
+  const { url, port, inbox, close } = await startPreviewServer({
     ...options,
     file,
     root,
   });
 
   console.error(`Comment to Fix preview: ${url}`);
-  console.error(`Inbox: ${path.resolve(options.inbox)}`);
+  console.error(`Port: ${port}`);
+  console.error(`Inbox: ${path.resolve(inbox)}`);
+  if (port !== options.port) {
+    console.error(
+      `(port ${options.port} was busy — bound to ${port} for this parallel session)`,
+    );
+  }
   console.error("Press Ctrl+C to stop.");
 
   if (options.open) {

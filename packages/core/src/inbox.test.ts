@@ -5,8 +5,12 @@ import { describe, expect, it } from "vitest";
 
 import {
   appendAnnotation,
+  DEFAULT_INBOX_FILE,
+  DEFAULT_PREVIEW_PORT,
   getPendingAnnotations,
+  inboxPathForPort,
   markProcessed,
+  processedPathForInbox,
   type Annotation,
 } from "../src/index.js";
 
@@ -59,5 +63,41 @@ describe("inbox", () => {
     await expect(markProcessed("missing", inbox, processed)).rejects.toThrow(
       "Annotation not found",
     );
+  });
+});
+
+describe("parallel session paths", () => {
+  it("keeps the default inbox for the default port", () => {
+    expect(inboxPathForPort(DEFAULT_PREVIEW_PORT)).toBe(DEFAULT_INBOX_FILE);
+  });
+
+  it("scopes the inbox by port for non-default ports", () => {
+    expect(inboxPathForPort(5174)).toBe(".comment-to-fix/inbox-5174.jsonl");
+    expect(inboxPathForPort(5175)).toBe(".comment-to-fix/inbox-5175.jsonl");
+  });
+
+  it("gives each port a distinct inbox (no collisions)", () => {
+    const a = inboxPathForPort(5174);
+    const b = inboxPathForPort(5175);
+    expect(a).not.toBe(b);
+    expect(a).not.toBe(inboxPathForPort(DEFAULT_PREVIEW_PORT));
+  });
+
+  it("co-locates processed state next to the inbox", () => {
+    expect(processedPathForInbox(".comment-to-fix/inbox.jsonl")).toBe(
+      path.join(".comment-to-fix", "processed.json"),
+    );
+    expect(processedPathForInbox(".comment-to-fix/inbox-5174.jsonl")).toBe(
+      path.join(".comment-to-fix", "processed-5174.json"),
+    );
+    expect(processedPathForInbox("/tmp/sess/inbox-5180.jsonl")).toBe(
+      path.join("/tmp/sess", "processed-5180.json"),
+    );
+  });
+
+  it("derives a distinct processed path for each port-scoped inbox", () => {
+    const p1 = processedPathForInbox(inboxPathForPort(5174));
+    const p2 = processedPathForInbox(inboxPathForPort(5175));
+    expect(p1).not.toBe(p2);
   });
 });

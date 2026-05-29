@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { writeProcessedState } from "@comment-to-fix/core";
+import { inboxPathForPort, writeProcessedState } from "@comment-to-fix/core";
 
 import { startPreviewServer } from "./preview-server.js";
 
@@ -151,5 +151,64 @@ describe("preview server", () => {
     expect(afterJson.processedIds).toContain("ann_sse");
 
     reader.cancel();
+  });
+
+  it("auto-increments the port when the requested one is busy", async () => {
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "ctf-parallel-"));
+    const fixture = path.join(repoRoot, "fixtures/sample.html");
+    const base = {
+      file: fixture,
+      root: path.dirname(fixture),
+      rootLabel: "fixtures",
+      port: 8770,
+      open: false,
+    };
+
+    const a = await startPreviewServer({ ...base, inbox: path.join(dir, "a.jsonl") });
+    const b = await startPreviewServer({ ...base, inbox: path.join(dir, "b.jsonl") });
+
+    try {
+      expect(a.port).toBe(8770);
+      // Negative guard: the second session must NOT reuse the busy port.
+      expect(b.port).not.toBe(8770);
+      expect(b.port).toBe(8771);
+      expect(b.url).toContain(":8771");
+
+      // Both servers respond independently on their own ports.
+      expect((await fetch(`${a.url}`)).ok).toBe(true);
+      expect((await fetch(`${b.url}`)).ok).toBe(true);
+    } finally {
+      a.close();
+      b.close();
+    }
+  });
+
+  it("respects an explicit inbox and otherwise derives one from the bound port", async () => {
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "ctf-inbox-"));
+    const explicitInbox = path.join(dir, "custom.jsonl");
+    const fixture = path.join(repoRoot, "fixtures/sample.html");
+    const base = {
+      file: fixture,
+      root: path.dirname(fixture),
+      rootLabel: "fixtures",
+      open: false,
+    };
+
+    const explicit = await startPreviewServer({ ...base, port: 8780, inbox: explicitInbox });
+    try {
+      expect(explicit.inbox).toBe(explicitInbox);
+    } finally {
+      explicit.close();
+    }
+
+    const derived = await startPreviewServer({ ...base, port: 8781 });
+    try {
+      expect(derived.inbox).toBe(inboxPathForPort(8781));
+      // Negative guard: a non-default port must not fall back to the default inbox.
+      expect(derived.inbox).not.toBe(inboxPathForPort(5173));
+    } finally {
+      derived.close();
+      await fs.rm(path.resolve(".comment-to-fix/processed-8781.json"), { force: true });
+    }
   });
 });

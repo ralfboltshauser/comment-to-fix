@@ -67,6 +67,11 @@ comment-to-fix help
 
 Annotations append to `.comment-to-fix/inbox.jsonl`.
 
+Run multiple sessions in parallel: each preview grabs the next free port
+(starting from `--port`, default 5173) and gets its own port-scoped inbox
+(e.g. `.comment-to-fix/inbox-5174.jsonl`). The preview prints the bound `Port`
+and `Inbox` — pass that `--inbox` to `watch`/`mark-processed` for that session.
+
 ## Development
 
 ```bash

@@ -12,9 +12,14 @@ Usage:
 
 Preview options:
   --root <dir>       Asset root (default: directory of HTML file)
-  --port <number>    Preview server port (default: 5173)
+  --port <number>    Preferred port (default: 5173); auto-increments if busy
   --open             Open browser after starting
-  --inbox <path>     Inbox file (default: .comment-to-fix/inbox.jsonl)
+  --inbox <path>     Inbox file (default: port-scoped, .comment-to-fix/inbox.jsonl)
+
+Parallel sessions:
+  Run as many previews as you like — each grabs the next free port and gets
+  its own port-scoped inbox automatically. The preview prints the bound URL
+  and Inbox path; pass that same --inbox to watch and mark-processed.
 
 Watch options:
   --once             Block until one new annotation, print JSON, exit

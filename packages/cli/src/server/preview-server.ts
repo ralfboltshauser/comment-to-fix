@@ -1,7 +1,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import path from "node:path";
 
-import { handleCommentPost, getProcessedPath } from "./api.js";
+import { handleCommentPost } from "./api.js";
 import { assetExists, readAsset } from "./assets.js";
 import { injectHtml } from "./inject.js";
 import { LIVE_RELOAD_CLIENT } from "./inject.js";
@@ -14,7 +14,21 @@ import {
   startFileWatcher,
 } from "./static.js";
 import type { PreviewOptions } from "../commands/preview.js";
-import { getProcessedAnnotationIds, readProcessedState } from "@comment-to-fix/core";
+import {
+  getProcessedAnnotationIds,
+  inboxPathForPort,
+  processedPathForInbox,
+  readProcessedState,
+} from "@comment-to-fix/core";
+
+const MAX_PORT_ATTEMPTS = 50;
+
+export type PreviewServerHandle = {
+  url: string;
+  port: number;
+  inbox: string;
+  close: () => void;
+};
 
 function sendText(res: ServerResponse, status: number, body: string, contentType = "text/plain; charset=utf-8"): void {
   res.writeHead(status, { "Content-Type": contentType });
@@ -26,27 +40,15 @@ function sendBuffer(res: ServerResponse, status: number, body: Buffer, contentTy
   res.end(body);
 }
 
-export function startPreviewServer(options: PreviewOptions): Promise<{ url: string; close: () => void }> {
-  const rootDir = path.resolve(options.root);
-  const entryFile = path.resolve(options.file);
-  const entryRelative = path.relative(rootDir, entryFile).split(path.sep).join("/");
-  const pageUrl = `/${entryRelative}`;
-
-  const serverOptions: PreviewOptions = {
-    ...options,
-    root: rootDir,
-    rootLabel: options.rootLabel,
-    relativePage: entryRelative,
-    pageUrl,
-  };
-
-  const stopWatcher = startFileWatcher(rootDir);
-  const processedPath = getProcessedPath(options.inbox);
-  const stopProcessedWatcher = startProcessedWatcher(options.inbox, processedPath);
-
-  const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
+function createPreviewHandler(
+  rootDir: string,
+  pageUrl: string,
+  serverOptions: PreviewOptions,
+  processedPath: string,
+) {
+  return async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
     const method = req.method ?? "GET";
-    const url = new URL(req.url ?? "/", `http://127.0.0.1:${options.port}`);
+    const url = new URL(req.url ?? "/", `http://127.0.0.1:${serverOptions.port}`);
     const pathname = url.pathname;
 
     try {
@@ -56,7 +58,7 @@ export function startPreviewServer(options: PreviewOptions): Promise<{ url: stri
       }
 
       if (method === "GET" && pathname === "/__ctf__/status") {
-        const processedIds = await getProcessedAnnotationIds(options.inbox, processedPath);
+        const processedIds = await getProcessedAnnotationIds(serverOptions.inbox, processedPath);
         const state = await readProcessedState(processedPath);
         sendText(
           res,
@@ -125,20 +127,75 @@ export function startPreviewServer(options: PreviewOptions): Promise<{ url: stri
       const message = error instanceof Error ? error.message : String(error);
       sendText(res, 500, message);
     }
-  });
+  };
+}
 
-  return new Promise((resolve, reject) => {
-    server.once("error", reject);
-    server.listen(options.port, "127.0.0.1", () => {
-      const url = `http://127.0.0.1:${options.port}${pageUrl}`;
-      resolve({
-        url,
-        close: () => {
-          stopWatcher();
-          stopProcessedWatcher();
-          server.close();
-        },
+export function startPreviewServer(options: PreviewOptions): Promise<PreviewServerHandle> {
+  const rootDir = path.resolve(options.root);
+  const entryFile = path.resolve(options.file);
+  const entryRelative = path.relative(rootDir, entryFile).split(path.sep).join("/");
+  const pageUrl = `/${entryRelative}`;
+
+  const stopWatcher = startFileWatcher(rootDir);
+
+  return new Promise<PreviewServerHandle>((resolve, reject) => {
+    let attempt = 0;
+
+    const tryListen = (candidate: number): void => {
+      const inbox = options.inbox ?? inboxPathForPort(candidate);
+      const processedPath = processedPathForInbox(inbox);
+      const serverOptions: PreviewOptions = {
+        ...options,
+        root: rootDir,
+        rootLabel: options.rootLabel,
+        relativePage: entryRelative,
+        pageUrl,
+        port: candidate,
+        inbox,
+      };
+
+      // A fresh server per attempt: re-calling listen() on a server that
+      // already emitted EADDRINUSE does not rebind to a new port.
+      const server = createServer(
+        createPreviewHandler(rootDir, pageUrl, serverOptions, processedPath),
+      );
+
+      const onError = (error: NodeJS.ErrnoException): void => {
+        // `exclusive: true` makes a busy port fail with EADDRINUSE even on
+        // macOS/BSD (where SO_REUSEADDR otherwise allows silent duplicate
+        // binds), so retrying the next port is race-free across processes.
+        if (
+          error.code === "EADDRINUSE" &&
+          attempt < MAX_PORT_ATTEMPTS - 1 &&
+          candidate + 1 < 65536
+        ) {
+          attempt += 1;
+          tryListen(candidate + 1);
+          return;
+        }
+        stopWatcher();
+        reject(error);
+      };
+
+      server.once("error", onError);
+      server.listen({ port: candidate, host: "127.0.0.1", exclusive: true }, () => {
+        server.removeListener("error", onError);
+
+        const stopProcessedWatcher = startProcessedWatcher(inbox, processedPath);
+
+        resolve({
+          url: `http://127.0.0.1:${candidate}${pageUrl}`,
+          port: candidate,
+          inbox,
+          close: () => {
+            stopWatcher();
+            stopProcessedWatcher();
+            server.close();
+          },
+        });
       });
-    });
+    };
+
+    tryListen(options.port);
   });
 }
