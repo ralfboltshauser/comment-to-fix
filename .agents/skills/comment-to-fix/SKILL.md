@@ -28,6 +28,15 @@ Defaults to `./index.html` in the current working directory.
 
 ## When the user runs `/comment-to-fix`
 
+## Non-negotiable behavior
+
+Running this skill means opening the preview **and then attaching to the Comment to Fix CLI inbox with `watch --once`**. The agent must not finish the turn just because the preview opened.
+
+- After the preview starts, immediately run `npx comment-to-fix watch --once --inbox <inbox>` using the exact `Inbox` path printed by the preview.
+- `watch --once` is expected to hang while it waits for the next sent comment. Leave it running and keep the session attached.
+- After every fix and `mark-processed`, immediately start a fresh `watch --once --inbox <inbox>` unless the user explicitly says stop / done / exit comment to fix.
+- A Comment to Fix session is only complete when the user explicitly stops it or the preview/watch process cannot be started.
+
 ### 1. Resolve the HTML entry file
 
 - Use the path the user provided, otherwise `./index.html` in the project root
@@ -121,6 +130,7 @@ Repeat until the user explicitly says stop / done / exit comment to fix:
 
 **Critical rules:**
 
+- Starting the preview alone is incomplete — always attach to the CLI watcher with `watch --once`
 - Never treat a single annotation as task completion
 - Never poll `.comment-to-fix/inbox.jsonl` manually — always use `watch --once`
 - After each fix, immediately run `watch --once` again unless the user interrupted
