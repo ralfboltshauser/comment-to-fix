@@ -28,6 +28,15 @@ Defaults to `./index.html` in the current working directory.
 
 ## When the user runs `/comment-to-fix`
 
+## Non-negotiable behavior
+
+Running this skill means opening the preview **and then attaching to the Comment to Fix CLI inbox with `watch --once`**. The agent must not finish the turn just because the preview opened.
+
+- After the preview starts, immediately run `npx comment-to-fix watch --once --inbox <inbox>` using the exact `Inbox` path printed by the preview.
+- `watch --once` is expected to hang while it waits for the next sent comment. Leave it running and keep the session attached.
+- After every fix and `mark-processed`, immediately start a fresh `watch --once --inbox <inbox>` unless the user explicitly says stop / done / exit comment to fix.
+- A Comment to Fix session is only complete when the user explicitly stops it or the preview/watch process cannot be started.
+
 ### 1. Resolve the HTML entry file
 
 - Use the path the user provided, otherwise `./index.html` in the project root
@@ -44,6 +53,17 @@ npx comment-to-fix [file.html] --open
 ```
 
 Use `pnpm dlx` or `bunx` only if the user explicitly prefers that package manager. Default to `npx` for compatibility.
+
+**Read the preview output before continuing.** It prints three lines you must capture for this session:
+
+```
+Comment to Fix preview: http://127.0.0.1:5174/index.html
+Port: 5174
+Inbox: /abs/path/.comment-to-fix/inbox-5174.jsonl
+```
+
+- The port auto-increments when a port is busy, so **never assume 5173** — use the URL it printed.
+- The `Inbox` path is **port-scoped** so multiple Comment to Fix sessions run in parallel without colliding. Remember this exact path and pass it as `--inbox <inbox>` to every `watch` and `mark-processed` call in this session.
 
 Tell the user:
 
@@ -88,9 +108,9 @@ When implementing fixes, always run `mark-processed` after the change — that t
 
 Repeat until the user explicitly says stop / done / exit comment to fix:
 
-1. Run:
+1. Run (use the `Inbox` path from step 3):
    ```bash
-   npx comment-to-fix watch --once
+   npx comment-to-fix watch --once --inbox <inbox>
    ```
 2. Parse the JSON line printed to stdout
 3. Implement the smallest correct fix in files under `annotation.root` using:
@@ -101,13 +121,16 @@ Repeat until the user explicitly says stop / done / exit comment to fix:
    - `annotation.page`
 4. Run:
    ```bash
-   npx comment-to-fix mark-processed --id <annotation.id>
+   npx comment-to-fix mark-processed --id <annotation.id> --inbox <inbox>
    ```
 5. Reply briefly with what changed and: **Waiting for your next comment…**
 6. Go back to step 1
 
+> For the default session (port 5173) the `--inbox` flag is optional — it defaults to `.comment-to-fix/inbox.jsonl`. Always pass it when running parallel sessions so each loop reads its own inbox.
+
 **Critical rules:**
 
+- Starting the preview alone is incomplete — always attach to the CLI watcher with `watch --once`
 - Never treat a single annotation as task completion
 - Never poll `.comment-to-fix/inbox.jsonl` manually — always use `watch --once`
 - After each fix, immediately run `watch --once` again unless the user interrupted
