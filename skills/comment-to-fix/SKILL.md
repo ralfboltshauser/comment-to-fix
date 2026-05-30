@@ -67,7 +67,7 @@ Inbox: /abs/path/.comment-to-fix/inbox-5174.jsonl
 
 Tell the user:
 
-> Comment to Fix is open. Click the comment button (bottom-right) to enter feedback mode, then point at anything and leave a comment. Use **Copy** (C) to copy all feedback as markdown, or **Send** on each comment for the agent loop. Say **stop** when you're done.
+> Comment to Fix is open and ready for feedback. Point at anything and leave a comment. Use **Copy** (C) to copy all feedback as markdown, or **Send** on each comment for the agent loop. Say **stop** when you're done.
 
 ### Overlay shortcuts
 

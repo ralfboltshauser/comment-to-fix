@@ -201,7 +201,7 @@ function fromSerializablePending(s: SerializablePending): PendingAnnotation {
 
 export function App() {
   const pageKey = getPageKey();
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const [settings, setSettings] = useState<OverlaySettings>(() => loadSettings());
   const [annotations, setAnnotations] = useState<Annotation[]>(() => loadAnnotations(pageKey));
   const [showMarkers, setShowMarkers] = useState(true);

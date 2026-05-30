@@ -2,8 +2,8 @@
 
 **Point at any HTML page, leave a comment, get the fix.**
 
-`comment-to-fix` serves your HTML with a browser overlay. Click any element,
-type a comment, and it's appended to a local inbox (`.comment-to-fix/inbox.jsonl`)
+`comment-to-fix` serves your HTML with a browser overlay that opens ready for
+feedback. Click any element, type a comment, and it's appended to a local inbox (`.comment-to-fix/inbox.jsonl`)
 that your coding agent reads, fixes, and marks processed — with live reload and
 per-comment lifecycle markers (fixing → ready).
 
