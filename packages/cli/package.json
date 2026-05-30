@@ -1,6 +1,6 @@
 {
   "name": "comment-to-fix",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Comment to Fix — point at HTML, comment, get the fix",
   "type": "module",
   "bin": {
